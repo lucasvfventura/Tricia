@@ -1,0 +1,23 @@
+<div class="row">
+    <form class="col-md-4 col-md-offset-4 text-left">
+        <div class="form-group">
+            <label>
+                Enter the question title:
+                <input type="text" class="form-control" [(ngModel)]="question.Title" placeholder="New Question Title" required>
+            </label>
+        </div>
+        <div *ngFor="let answer of question.Answers"  class="form-group">
+            <label>
+                Enter answer text:
+                <input class="form-control" type="text" [(ngModel)]="answer.Text">
+            </label>
+            <label>
+                Is Correct?
+                <input type="checkbox" [(checked)]="answer.IsChecked" (click)="answer.IsChecked=!answer.IsChecked">
+            </label>
+            <button class="btn" (click)="removeAnswer(answer)">-</button>
+        </div>
+        <button class="btn" (click)="addAnswer()">+</button>
+        <button class="btn" (click)="save()">Save</button>
+    </form>
+</div>
