@@ -4,6 +4,6 @@ namespace Trivia.Models
 {
     public class User : IdentityUser
     {
-        public ICollection<UserAnswer> Answers { get; set; }
+        public ICollection<Answer> Answers { get; set; }
     }
 }

@@ -58,7 +58,6 @@ namespace Trivia
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<IAnswerRepository, AnswerRepository>();
-            services.AddScoped<IUserAnswerRepository, UserAnswerRepository>();
             
 
             // AutoMapper

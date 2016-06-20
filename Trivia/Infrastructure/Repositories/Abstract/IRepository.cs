@@ -8,6 +8,4 @@ namespace Trivia.Infrastructure.Repositories.Abstract
     }
     public interface IAnswerRepository : IModelRepository<Answer> {}
 
-    public interface IUserAnswerRepository : IModelRepository<UserAnswer> {}
-
 }

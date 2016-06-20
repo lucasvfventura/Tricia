@@ -10,8 +10,6 @@ namespace Trivia.Infrastructure
 
         public DbSet<Answer> Answers { get; set; }
 
-        public DbSet<UserAnswer> UserAnswers { get; set; }
-
         public TriviaContext(DbContextOptions<TriviaContext> context) : base(context)
         {
 
