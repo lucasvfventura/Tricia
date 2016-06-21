@@ -9,15 +9,23 @@ import { DataService } from '../core/services/dataService';
 })
 export class NewQuestionComponent {
 
-    @Input()
-    public question: Question;
+    private question: Question;
 
     constructor(private service: DataService) {
         this.service.set('api/question');
+        this.question = new Question();
+        for (let i = 0; i < 5; i++) {
+            this.question.Answers.push(new Answer());
+            
+        }
     }
 
     addAnswer(){
         this.question.Answers.push(new Answer());
+    }
+
+    get hideRemoveAnswer(){
+        return this.question.Answers.length > 5 ? "" : "hidden";
     }
 
     removeAnswer(answer: Answer){

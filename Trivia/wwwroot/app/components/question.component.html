@@ -1,6 +1,6 @@
 <h1>{{question.Title}}</h1>
 <div *ngFor="let answer of question.Answers">
-    <input type="radio" [(checked)]="answer.IsChecked" (click)="answerClicked(answer)" [id]="question.Id + 'a' +answer.Id" [name]="question.Id" /><label [attr.for]="question.Id + 'a' +answer.Id"> {{answer.Text}}</label>
+  <input type="radio" [(checked)]="answer.IsChecked" (click)="answerClicked(answer)" [id]="question.Id + 'a' +answer.Id" [name]="question.Id" /><label [attr.for]="question.Id + 'a' +answer.Id"> {{answer.Text}}</label>
 </div>
 <button class="btn btn-success" (click)="answerQuestion()" [(disabled)]="answerDisable">Answer!</button>
 <button class="btn btn-default" (click)="nextQuestion()">Next</button>
@@ -9,16 +9,12 @@
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <strong>You Got It!</strong>
   </div>
-</div>
-<div class="row">
   <div class="col-md-4 col-md-offset-4 alert alert-danger alert-dismissible fade in" role="alert" [(attr.hidden)]="responseWrong">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <strong>Ohn....Perharps next time!</strong>
   </div>
-</div>
-<div class="row">
-    <div class="col-md-4 col-md-offset-4 col-xs-6 col-xs-offset-3 alert alert-danger alert-dismissible fade in" role="alert" [(attr.hidden)]="noAnswer">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <strong>Please select an answer first!</strong>
-    </div>
+  <div class="col-md-4 col-md-offset-4 col-xs-6 col-xs-offset-3 alert alert-danger alert-dismissible fade in" role="alert" [(attr.hidden)]="noAnswer">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>Please select an answer first!</strong>
+  </div>
 </div>

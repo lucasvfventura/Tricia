@@ -1,4 +1,4 @@
-import { Component, Input} from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 import { Question } from '../core/domain/question';
 import { DataService } from '../core/services/dataService';
 import { Answer } from '../core/domain/answer';
@@ -7,10 +7,9 @@ import { Answer } from '../core/domain/answer';
     selector: 'question',
     templateUrl: './app/components/question.component.html'
 })
-export class QuestionComponent {
+export class QuestionComponent implements OnInit {
     
-    @Input()
-    public question: Question;
+    private question: Question;
 
     public answerDisable = false;
     public responseRight = true;
@@ -19,7 +18,18 @@ export class QuestionComponent {
     
     constructor(private service: DataService) 
     { 
-        this.service.set('api/question')
+        this.service.set('api/question');
+        this.question = new Question();
+        this.question.Answers.push(new Answer());
+    }
+
+    ngOnInit() { 
+        this.service.getCustomResource('/random').subscribe(
+            res => {
+                let data: any = res.json();
+                this.question = data;
+            }
+        );
     }
     
     answerClicked(answer: Answer)
@@ -31,7 +41,7 @@ export class QuestionComponent {
     answerQuestion() {
         let selectedAnswer = this.question.Answers.filter( a => a.IsChecked );
         if (selectedAnswer[0]) {
-            this.service.postCustomResource('/' + this.question.Id + '/user/123', selectedAnswer[0]).subscribe(
+            this.service.postCustomResource('/' + this.question.Id + '/answer', selectedAnswer[0]).subscribe(
                 res => {
                     this.answerDisable = true;
                     this.responseRight = res.json() ? undefined : true;

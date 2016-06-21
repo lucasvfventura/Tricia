@@ -32,11 +32,14 @@ namespace Trivia.Controllers
             return Mapper.Map<Question, QuestionViewModel>(question);
         }
 
-        public IActionResult Post()
+        [HttpPost("{id}/answer")]
+        public bool Post(int id, [FromBody] AnswerViewModel answerViewModel)
         {
-            ViewData["Message"] = "Your contact page.";
+            var question = qRepository.GetSingle(id);
+            var answer = aRepository.GetSingle(answerViewModel.Id);
 
-            return null;
+            //TODO add answer to logged user
+            return answer.IsCorrect;
         }
 
         public IActionResult Error()

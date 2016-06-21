@@ -1,34 +1,35 @@
 ﻿import {Component} from '@angular/core';
 import {DataService} from './core/services/dataService'
-import {Question} from './core/domain/question';
-import {Answer} from './core/domain/answer';
-import {QuestionComponent} from './components/question.component';
-import {NewQuestionComponent} from './components/newquestion.component';
+import {Routes, Route, Router} from '@angular/router'
+import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router';
+import {NewQuestionComponent} from './components/newquestion.component'
+import {QuestionComponent} from './components/question.component'
 
 @Component({
     selector: 'trivia-app',
     templateUrl: './app/app.html',
-    providers: [DataService],
-    directives: [QuestionComponent, NewQuestionComponent]
+    providers: [DataService, ROUTER_PROVIDERS],
+    directives: [ROUTER_DIRECTIVES]
 })
+@Routes([
+    new Route({path: "/question", component: QuestionComponent }),
+    new Route({path: "/", component: QuestionComponent }),
+    new Route({path: "/newquestion", component: NewQuestionComponent })
+])
 export class AppComponent {
-    
-    private question: Question;
-    private newQuestion: Question;
-    
-    constructor(public service: DataService) {
-        service.set('api/question/random');
-        this.getAll();
-        this.newQuestion = new Question()
-        this.newQuestion.Answers.push(new Answer());
+
+    private route: string;
+
+    constructor(private router: Router){
+        this.route = 'question';
     }
 
-    getAll() {
-        this.service.get().subscribe(
-            res => {
-                let data: any = res.json();
-                this.question = data;
-            }
-        );
+    isActive(uri: string){
+        return this.route == uri ? 'active' : '';
+    }
+
+    navigate(uri: string) { 
+        this.route = uri;
+        this.router.navigate([`//${uri}`]); 
     }
 }

@@ -1,2 +1,5 @@
-﻿<question *ngIf="question" [question]="question"></question>
-<newquestion [question]="newQuestion"></newquestion>
+﻿<ul class="nav nav-pills nav-justified">
+  <li role="presentation" class="{{isActive('question')}}"><a (click)="navigate('question')">Answer</a></li>
+  <li role="presentation"  class="{{isActive('newquestion')}}"><a (click)="navigate('newquestion')">New Question</a></li>
+</ul>
+<router-outlet></router-outlet>
