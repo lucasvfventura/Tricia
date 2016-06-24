@@ -35,11 +35,19 @@ namespace Trivia.Controllers
         [HttpPost("{id}/answer")]
         public bool Post(int id, [FromBody] AnswerViewModel answerViewModel)
         {
-            var question = qRepository.GetSingle(id);
-            var answer = aRepository.GetSingle(answerViewModel.Id);
-
-            //TODO add answer to logged user
-            return answer.IsCorrect;
+            //var question = qRepository.GetSingle(id);
+            if (ModelState.IsValid)
+            {
+                var answer = aRepository.GetSingle(answerViewModel.Id);
+                if(answer.QuestionId == id)
+                {
+                    // TODO: add answer to logged user
+                    return answer.IsCorrect;
+                }
+            }
+            
+            // TODO: return erro
+            return false;
         }
 
         public IActionResult Error()

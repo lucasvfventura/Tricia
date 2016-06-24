@@ -9,17 +9,13 @@ namespace Trivia.Controllers
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult Aurelia()
         {
-            ViewData["Message"] = "Your application description page.";
-
             return View();
         }
 
-        public IActionResult Contact()
+        public IActionResult React()
         {
-            ViewData["Message"] = "Your contact page.";
-
             return View();
         }
 
