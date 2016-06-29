@@ -1,4 +1,6 @@
-﻿namespace Trivia.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Trivia.Models
 {
     public class Answer : IModelBase
     {
@@ -8,8 +10,9 @@
 
         public bool IsCorrect { get; set; }
 
-        public Question Question { get; set; }
-
         public int QuestionId { get; set; }
+
+        [ForeignKey("QuestionId")]
+        public Question Question { get; set; }
     }
 }

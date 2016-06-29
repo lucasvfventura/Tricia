@@ -11,6 +11,7 @@ using Trivia.Infrastructure.Repositories.Abstract;
 using Trivia.Infrastructure.Mappings;
 using Trivia.Infrastructure.Repositories;
 using Trivia.Models;
+using Newtonsoft.Json.Serialization;
 
 namespace Trivia
 {
@@ -51,7 +52,15 @@ namespace Trivia
                 .AddEntityFrameworkStores<TriviaContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(opt =>
+            {
+                var resolver  = opt.SerializerSettings.ContractResolver;
+                if (resolver != null)
+                {
+                    var res = resolver as DefaultContractResolver;
+                    res.NamingStrategy = null;  // <<!-- this removes the camelcasing
+                }
+            });
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();

@@ -4,6 +4,7 @@ using Trivia.Infrastructure.Repositories.Abstract;
 using Trivia.Models;
 using Trivia.ViewModels;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Trivia.Controllers
 {
@@ -29,6 +30,7 @@ namespace Trivia.Controllers
         public QuestionViewModel Random()
         {
             var question = qRepository.GetRandom();
+            aRepository.FindBy(a => a.QuestionId == question.Id).ToList();
             return Mapper.Map<Question, QuestionViewModel>(question);
         }
 
