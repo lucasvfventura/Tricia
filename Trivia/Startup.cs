@@ -45,7 +45,7 @@ namespace Trivia
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddDbContext<TriviaContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlite("Filename=./blog.db"));
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<TriviaContext>()
@@ -76,7 +76,6 @@ namespace Trivia
             
             if (env.IsDevelopment())
             {
-                
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
                 app.UseBrowserLink();

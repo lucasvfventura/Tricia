@@ -17,7 +17,10 @@ namespace Trivia.Infrastructure
 
         private static void InitQuestions()
         {
-            if (context.Questions.Any())
+            context.Questions.RemoveRange(context.Questions.ToList());
+            context.Answers.RemoveRange(context.Answers.ToList());
+            context.SaveChanges();
+            if (context.Questions.Count() < 5)
             {
                 for (int i = 0; i < 10; i++)
                 {
@@ -31,7 +34,7 @@ namespace Trivia.Infrastructure
                         }).Entity;
                         myAnswers.Add(answer);
                     }
-                    
+
                     context.Questions.Add(new Question()
                     {
                         Title = $"{i} + 2?",
