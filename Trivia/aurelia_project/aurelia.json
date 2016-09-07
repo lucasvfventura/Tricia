@@ -4,14 +4,15 @@
   "platform": {
     "id": "aspnetcore",
     "displayName": "ASP.NET Core",
-    "output": "wwwroot\\scripts"
+    "output": "wwwroot\\scripts",
+    "baseUrl": "../../scripts"
   },
   "transpiler": {
     "id": "typescript",
     "displayName": "TypeScript",
     "fileExtension": ".ts",
     "dtsSource": [
-      "./typings/globals/**/*.d.ts",
+      "./typings/**/*.d.ts",
       "./custom_typings/**/*.d.ts"
     ],
     "source": "src\\**\\*.ts"
@@ -50,7 +51,7 @@
         "id": "aspnetcore",
         "displayName": "ASP.NET Core",
         "output": "wwwroot\\scripts",
-        "baseUrl": "../scripts"
+        "baseUrl": "../../scripts"
       }
     ],
     "loader": {

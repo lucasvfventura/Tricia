@@ -7,10 +7,10 @@ export default class TaskGenerator {
 
   execute() {
     return this.ui
-      .ensureAnswer(this.options.args[0], 'What would you like to call the generator?')
+      .ensureAnswer(this.options.args[0], 'What would you like to call the task?')
       .then(name => {
         let fileName = this.project.makeFileName(name);
-        let className = this.project.makeClassName(name);
+        let functionName = this.project.makeFunctionName(name);
 
         this.project.tasks.add(
           ProjectItem.text(`${fileName}.ts`, this.generateSource(functionName))
@@ -30,6 +30,8 @@ export default function ${functionName}() {
   return gulp.src(project.paths.???)
     .pipe(changed(project.paths.output, {extension: '.???'}))
     .pipe(gulp.dest(project.paths.output));
-}`
+}
+
+`
   }
 }
