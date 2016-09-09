@@ -1,0 +1,24 @@
+<template>
+  <div class="row">
+    <form class="col-md-4 col-md-offset-5 text-left">
+        <div class="form-group">
+            <label>
+                Enter the question title:
+                <input type="text" class="form-control" text.bind="question.Title" placeholder="New Question Title">
+            </label>
+        </div>
+        <div repeat.for="answer of question.Answers"  class="form-group">
+            <label>
+                Enter answer text:
+                <input class="form-control" type="text" text.bind="answer.Text">
+            </label><br>
+            <label>
+                <input type="checkbox" checked.bind="answer.IsChecked"> Is Correct?
+            </label>
+            <button class="btn btn-danger btn-xs ${hideRemoveAnswer}" click.trigger="removeAnswer(answer)" hidden>Remove</button>
+        </div>
+        <button class="btn btn-success" click.trigger="save()">Save</button>
+        <button class="btn btn-default" click.trigger="addAnswer()">Add Answer</button>
+    </form>
+  </div>
+</template>

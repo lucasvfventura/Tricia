@@ -1,0 +1,23 @@
+<template>
+  <h1>${question.Title}</h1>
+  <div repeat.for="answer of question.Answers">
+    <label>
+      <input type="radio" model.bind="answer.Id" checked.bind="$parent.selectedAnswerId" id="${answer.Id + question.Id}" name="${question.Id}" />
+      ${answer.Text}
+    </label>
+  </div>
+  <button class="btn btn-success" click.trigger="answerQuestion()" disabled.bind="Answered">Answer!</button>
+  <button class="btn btn-default" click.trigger="nextQuestion()">Next</button>
+  
+  <!-- Validation Messages -->
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4 alert alert-success alert-dismissible fade in" role="alert" hidden.bind="responseRight">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <strong>You Got It!</strong>
+    </div>
+    <div class="col-md-4 col-md-offset-4 alert alert-danger alert-dismissible fade in" role="alert" hidden.bind="responseWrong">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <strong>Ohn....Perharps next time!</strong>
+    </div>
+  </div>
+</template>
